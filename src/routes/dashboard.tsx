@@ -23,6 +23,27 @@ export const Route = createFileRoute("/dashboard")({
 });
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const { user, profile, loading } = useAuth();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate({ to: "/login" });
+    }
+  }, [user, loading, navigate]);
+
+  if (loading || !user) {
+    return (
+      <PageShell>
+        <div className="container mx-auto px-6 py-32 flex items-center justify-center">
+          <Loader2 className="text-gold animate-spin" size={32} />
+        </div>
+      </PageShell>
+    );
+  }
+
+  const displayName = profile?.full_name?.split(" ")[0] ?? user.email?.split("@")[0] ?? "estudiante";
+
   return (
     <PageShell>
       <div className="container mx-auto px-6 py-12 md:py-16">
@@ -33,7 +54,7 @@ function Dashboard() {
               Hola de nuevo
             </p>
             <h1 className="font-display text-4xl md:text-5xl font-bold">
-              Bienvenido, <span className="text-gradient-gold italic">{user.name.split(" ")[0]}</span>
+              Bienvenido, <span className="text-gradient-gold italic">{displayName}</span>
             </h1>
             <p className="text-muted-foreground mt-2">¿Listo para tu sesión de hoy?</p>
           </div>
@@ -41,7 +62,7 @@ function Dashboard() {
             <Flame className="text-ember" size={28} />
             <div>
               <div className="font-display text-2xl font-bold text-gradient-gold leading-none">
-                {user.streak}
+                {mockUser.streak}
               </div>
               <div className="text-xs text-muted-foreground">días seguidos</div>
             </div>
@@ -50,8 +71,8 @@ function Dashboard() {
 
         {/* Estadísticas */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          <StatCard icon={Clock} value={`${user.totalHours}h`} label="Horas practicadas" />
-          <StatCard icon={BookOpen} value={user.totalLessonsCompleted} label="Lecciones" />
+          <StatCard icon={Clock} value={`${mockUser.totalHours}h`} label="Horas practicadas" />
+          <StatCard icon={BookOpen} value={mockUser.totalLessonsCompleted} label="Lecciones" />
           <StatCard icon={Trophy} value={badges.length} label="Logros" />
           <StatCard icon={Calendar} value={userProgress.length} label="Instrumentos activos" />
         </div>
