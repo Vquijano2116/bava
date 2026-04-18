@@ -9,38 +9,161 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegistroRouteImport } from './routes/registro'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as ExplorarRouteImport } from './routes/explorar'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LeccionIdRouteImport } from './routes/leccion.$id'
+import { Route as InstrumentoIdRouteImport } from './routes/instrumento.$id'
+import { Route as EvaluacionIdRouteImport } from './routes/evaluacion.$id'
 
+const RegistroRoute = RegistroRouteImport.update({
+  id: '/registro',
+  path: '/registro',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplorarRoute = ExplorarRouteImport.update({
+  id: '/explorar',
+  path: '/explorar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeccionIdRoute = LeccionIdRouteImport.update({
+  id: '/leccion/$id',
+  path: '/leccion/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstrumentoIdRoute = InstrumentoIdRouteImport.update({
+  id: '/instrumento/$id',
+  path: '/instrumento/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvaluacionIdRoute = EvaluacionIdRouteImport.update({
+  id: '/evaluacion/$id',
+  path: '/evaluacion/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/explorar': typeof ExplorarRoute
+  '/login': typeof LoginRoute
+  '/registro': typeof RegistroRoute
+  '/evaluacion/$id': typeof EvaluacionIdRoute
+  '/instrumento/$id': typeof InstrumentoIdRoute
+  '/leccion/$id': typeof LeccionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/explorar': typeof ExplorarRoute
+  '/login': typeof LoginRoute
+  '/registro': typeof RegistroRoute
+  '/evaluacion/$id': typeof EvaluacionIdRoute
+  '/instrumento/$id': typeof InstrumentoIdRoute
+  '/leccion/$id': typeof LeccionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/explorar': typeof ExplorarRoute
+  '/login': typeof LoginRoute
+  '/registro': typeof RegistroRoute
+  '/evaluacion/$id': typeof EvaluacionIdRoute
+  '/instrumento/$id': typeof InstrumentoIdRoute
+  '/leccion/$id': typeof LeccionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/explorar'
+    | '/login'
+    | '/registro'
+    | '/evaluacion/$id'
+    | '/instrumento/$id'
+    | '/leccion/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/explorar'
+    | '/login'
+    | '/registro'
+    | '/evaluacion/$id'
+    | '/instrumento/$id'
+    | '/leccion/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/explorar'
+    | '/login'
+    | '/registro'
+    | '/evaluacion/$id'
+    | '/instrumento/$id'
+    | '/leccion/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  ExplorarRoute: typeof ExplorarRoute
+  LoginRoute: typeof LoginRoute
+  RegistroRoute: typeof RegistroRoute
+  EvaluacionIdRoute: typeof EvaluacionIdRoute
+  InstrumentoIdRoute: typeof InstrumentoIdRoute
+  LeccionIdRoute: typeof LeccionIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/registro': {
+      id: '/registro'
+      path: '/registro'
+      fullPath: '/registro'
+      preLoaderRoute: typeof RegistroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explorar': {
+      id: '/explorar'
+      path: '/explorar'
+      fullPath: '/explorar'
+      preLoaderRoute: typeof ExplorarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,21 +171,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leccion/$id': {
+      id: '/leccion/$id'
+      path: '/leccion/$id'
+      fullPath: '/leccion/$id'
+      preLoaderRoute: typeof LeccionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/instrumento/$id': {
+      id: '/instrumento/$id'
+      path: '/instrumento/$id'
+      fullPath: '/instrumento/$id'
+      preLoaderRoute: typeof InstrumentoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/evaluacion/$id': {
+      id: '/evaluacion/$id'
+      path: '/evaluacion/$id'
+      fullPath: '/evaluacion/$id'
+      preLoaderRoute: typeof EvaluacionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  ExplorarRoute: ExplorarRoute,
+  LoginRoute: LoginRoute,
+  RegistroRoute: RegistroRoute,
+  EvaluacionIdRoute: EvaluacionIdRoute,
+  InstrumentoIdRoute: InstrumentoIdRoute,
+  LeccionIdRoute: LeccionIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
