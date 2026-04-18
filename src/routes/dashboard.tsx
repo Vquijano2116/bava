@@ -1,9 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Flame, Clock, BookOpen, Trophy, Calendar, ChevronRight } from "lucide-react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
+import { Flame, Clock, BookOpen, Trophy, Calendar, ChevronRight, Loader2 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { LevelBadge, ProgressBar } from "@/components/LevelBadge";
+import { useAuth } from "@/hooks/useAuth";
 import {
-  user,
+  user as mockUser,
   userProgress,
   badges,
   weeklyPractice,
